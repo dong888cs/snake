@@ -10,11 +10,11 @@
 
 using namespace sfSnake;
 
-const sf::Time Game::TimePerFrame = sf::seconds(1.f / 8.f);
+// 恢复固定的时间步长，每秒8次
+const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 std::shared_ptr<Screen> Game::Screen = nullptr;
 
-// 初始化静态成员
 BackgroundColor Game::globalBgColor_ = BackgroundColor::White;
 GridColor Game::globalGridColor_ = GridColor::Black;
 bool Game::globalGridVisible_ = true;
@@ -34,6 +34,7 @@ Game::Game()
     Game::Screen = std::make_shared<MenuScreen>();
 }
 
+// 恢复固定的游戏循环逻辑
 void Game::run()
 {
     sf::Clock clock;
@@ -48,7 +49,6 @@ void Game::run()
         {
             timeSinceLastUpdate -= TimePerFrame;
             
-            // 应用全局设置
             setBackgroundColor(globalBgColor_);
             setGridColor(globalGridColor_);
             setGridVisible(globalGridVisible_);
@@ -87,94 +87,32 @@ void Game::render()
     
     window_.display();
 }
-
-void Game::setBackgroundColor(BackgroundColor color)
-{
-    bgColor_ = color;
-}
-
-BackgroundColor Game::getBackgroundColor() const
-{
-    return bgColor_;
-}
-
-void Game::setGridColor(GridColor color)
-{
-    gridColor_ = color;
-}
-
-GridColor Game::getGridColor() const
-{
-    return gridColor_;
-}
-
-void Game::setGridVisible(bool visible)
-{
-    gridVisible_ = visible;
-}
-
-bool Game::isGridVisible() const
-{
-    return gridVisible_;
-}
-
-sf::Color Game::getActualBackgroundColor() const
-{
-    switch (bgColor_)
-    {
-        case BackgroundColor::White:
-            return sf::Color(240, 240, 240); // 白色
-        case BackgroundColor::Black:
-            return sf::Color(40, 40, 40);    // 黑色
-        case BackgroundColor::Brown:
-            return sf::Color(139, 69, 19);   // 棕色
-        default:
-            return sf::Color::White;
+// ... 此文件其余部分代码保持不变 ...
+void Game::setBackgroundColor(BackgroundColor color) { bgColor_ = color; }
+BackgroundColor Game::getBackgroundColor() const { return bgColor_; }
+void Game::setGridColor(GridColor color) { gridColor_ = color; }
+GridColor Game::getGridColor() const { return gridColor_; }
+void Game::setGridVisible(bool visible) { gridVisible_ = visible; }
+bool Game::isGridVisible() const { return gridVisible_; }
+sf::Color Game::getActualBackgroundColor() const {
+    switch (bgColor_) {
+        case BackgroundColor::White: return sf::Color(240, 240, 240);
+        case BackgroundColor::Black: return sf::Color(40, 40, 40);
+        case BackgroundColor::Brown: return sf::Color(139, 69, 19);
+        default: return sf::Color::White;
     }
 }
-
-sf::Color Game::getActualGridColor() const
-{
-    switch (gridColor_)
-    {
-        case GridColor::White:
-            return sf::Color(255, 255, 255, 50); // 半透明白色
-        case GridColor::Black:
-            return sf::Color(0, 0, 0, 50);       // 半透明黑色
-        case GridColor::Brown:
-            return sf::Color(139, 69, 19, 50);   // 半透明棕色
-        default:
-            return sf::Color(100, 100, 100, 50);
+sf::Color Game::getActualGridColor() const {
+    switch (gridColor_) {
+        case GridColor::White: return sf::Color(255, 255, 255, 50);
+        case GridColor::Black: return sf::Color(0, 0, 0, 50);
+        case GridColor::Brown: return sf::Color(139, 69, 19, 50);
+        default: return sf::Color(100, 100, 100, 50);
     }
 }
-
-// 实现静态方法
-void Game::setGlobalBackgroundColor(BackgroundColor color)
-{
-    globalBgColor_ = color;
-}
-
-BackgroundColor Game::getGlobalBackgroundColor()
-{
-    return globalBgColor_;
-}
-
-void Game::setGlobalGridColor(GridColor color)
-{
-    globalGridColor_ = color;
-}
-
-GridColor Game::getGlobalGridColor()
-{
-    return globalGridColor_;
-}
-
-void Game::setGlobalGridVisible(bool visible)
-{
-    globalGridVisible_ = visible;
-}
-
-bool Game::isGlobalGridVisible()
-{
-    return globalGridVisible_;
-} 
+void Game::setGlobalBackgroundColor(BackgroundColor color) { globalBgColor_ = color; }
+BackgroundColor Game::getGlobalBackgroundColor() { return globalBgColor_; }
+void Game::setGlobalGridColor(GridColor color) { globalGridColor_ = color; }
+GridColor Game::getGlobalGridColor() { return globalGridColor_; }
+void Game::setGlobalGridVisible(bool visible) { globalGridVisible_ = visible; }
+bool Game::isGlobalGridVisible() { return globalGridVisible_; }

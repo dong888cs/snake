@@ -32,31 +32,31 @@ public:
     unsigned getSize() const;
     unsigned getScore() const;
     float getSpeed() const;
-    bool isSpeedup() const { return speedup_; }  // 新增：检查是否处于加速状态
+    bool isSpeedup() const { return speedup_; }
 
     sf::Vector2f toWindow(sf::Vector2f node);
     
-    // 获取蛇的所有节点
     const std::deque<SnakeNode>& getNodes() const { return nodes_; }
 
 private:
-    static constexpr float NODE_SIZE = 15.0f;  // 减小节点大小
-    static constexpr float HEAD_SIZE = 18.0f;  // 减小头部大小
-    static constexpr float INITIAL_SPEED = 50.0f;    // 初始速度
-    static constexpr float SPEED_INCREMENT = 10.0f;  // 速度增量
-    static constexpr float MAX_SPEED = 200.0f;       // 最大速度（普通状态）
-    static constexpr float SPEEDUP_MULTIPLIER = 2.0f; // 加速状态的速度倍数
+    static constexpr float NODE_SIZE = 15.0f;
+    static constexpr float HEAD_SIZE = 18.0f;
+    static constexpr float INITIAL_SPEED = 100.0f;
+    static constexpr float SPEED_INCREMENT = 20.0f;
+    static constexpr float MAX_SPEED = 500.0f;
+    static constexpr float SPEEDUP_MULTIPLIER = 2.0f;
     static constexpr float TURN_THRESHOLD = 0.1f;
     static constexpr float GROWTH_INTERVAL = 0.5f;
-    static constexpr float MIN_DISTANCE = 5.0f;  // 减小最小距离
+    static constexpr float MIN_DISTANCE = 5.0f;
 
+    // 恢复move函数
     void move();
     void grow(int segments = 1);
     void checkEdgeCollisions();
     void checkSelfCollisions();
     void initNodes();
-    void increaseSpeed();  // 增加速度的方法
-    void toggleSpeedup();  // 切换加速状态
+    void increaseSpeed();
+    void toggleSpeedup();
 
     bool hitSelf_;
     bool speedup_;
@@ -81,10 +81,13 @@ private:
     
     static const int InitialSize;
     unsigned score_;
+    // 恢复tailOverlap_以配合旧的grow和move逻辑
     unsigned tailOverlap_;
 
-    float currentSpeed_;  // 新增：当前速度
+    float currentSpeed_;
+    // 使用计时器来控制非平滑移动的频率
+    sf::Time m_timeSinceLastMove_;
 };
 }
 
-#endif 
+#endif
