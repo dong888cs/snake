@@ -63,7 +63,6 @@ private:
     sf::Color getActualBackgroundColor() const;
     sf::Color getActualGridColor() const;
     
-    // 恢复固定的时间步长
     static const sf::Time TimePerFrame;
     
     static BackgroundColor globalBgColor_;

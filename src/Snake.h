@@ -49,7 +49,6 @@ private:
     static constexpr float GROWTH_INTERVAL = 0.5f;
     static constexpr float MIN_DISTANCE = 5.0f;
 
-    // 恢复move函数
     void move();
     void grow(int segments = 1);
     void checkEdgeCollisions();
@@ -81,11 +80,9 @@ private:
     
     static const int InitialSize;
     unsigned score_;
-    // 恢复tailOverlap_以配合旧的grow和move逻辑
     unsigned tailOverlap_;
 
     float currentSpeed_;
-    // 使用计时器来控制非平滑移动的频率
     sf::Time m_timeSinceLastMove_;
 };
 }

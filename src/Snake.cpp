@@ -123,7 +123,7 @@ void Snake::handleInput(sf::RenderWindow& window)
     }
 }
 
-// 恢复基于计时器的跳跃式移动
+// Remove comment about restoring timer-based movement
 void Snake::update(sf::Time delta)
 {
     float speed = currentSpeed_ * (speedup_ ? SPEEDUP_MULTIPLIER : 1.f);
@@ -141,7 +141,7 @@ void Snake::update(sf::Time delta)
     checkSelfCollisions();
 }
 
-// 恢复经典的move函数
+// Remove comment about restoring classic move function
 void Snake::move()
 {
     SnakeNode newHead = nodes_.front();
@@ -208,7 +208,7 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits)
     }
 }
 
-// 恢复旧的grow逻辑
+// Remove comment about restoring old grow logic
 void Snake::grow(int segments)
 {
     if (segments <= 0)

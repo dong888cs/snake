@@ -10,7 +10,6 @@
 
 using namespace sfSnake;
 
-// 恢复固定的时间步长，每秒8次
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 std::shared_ptr<Screen> Game::Screen = nullptr;
@@ -87,7 +86,7 @@ void Game::render()
     
     window_.display();
 }
-// ... 此文件其余部分代码保持不变 ...
+
 void Game::setBackgroundColor(BackgroundColor color) { bgColor_ = color; }
 BackgroundColor Game::getBackgroundColor() const { return bgColor_; }
 void Game::setGridColor(GridColor color) { gridColor_ = color; }
